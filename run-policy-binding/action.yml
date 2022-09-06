@@ -1,0 +1,25 @@
+name: "Run Policy Binding Tasks"
+description: "Run all tasks associated with a policy binding, e.g., weak spots and experiments."
+inputs:
+  apiAccessToken:
+    description: "Access token to be used when accessing the Steadybit API"
+    required: true
+  baseURL:
+    description: "Base URL of the Steadybit server"
+    required: false
+    default: "https://platform.steadybit.io"
+  file:
+    description: "Path relative to repository root to the policy binding file"
+    required: false
+    default: ".steadybit.yml"
+runs:
+  using: 'docker'
+  image: 'docker://steadybit/cli:3'
+  env:
+    STEADYBIT_TOKEN: ${{ inputs.apiAccessToken }}
+    STEADYBIT_URL: ${{ inputs.baseURL }}
+  args:
+    - policy-binding
+    - run
+    - -f
+    - ${{ inputs.file }}
