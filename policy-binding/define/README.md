@@ -1,6 +1,6 @@
-# Run Policy Binding Tasks
+# Define Policy Binding GitHub Action
 
-Run all tasks associated with a policy binding, e.g., weak spots and experiments.
+Register a policy binding with Steadybit.
 
 ## Example
 To use the GitHub Action, you'll need to add it as a step in your [workflow file](https://help.github.com/en/actions/automating-your-workflow-with-github-actions). By default, the only thing you need to do is set the `apiAccessToken` parameter to [Steadybit API access token](https://docs.steadybit.io/integrate/10-api).
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: steadybit/github-actions/run-policy-binding@v2
+      - uses: steadybit/github-actions/policy-binding/define@v1
         with:
           apiAccessToken: ${{ secrets.STEADYBIT_TOKEN }}
 ```
