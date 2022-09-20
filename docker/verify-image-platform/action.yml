@@ -15,3 +15,6 @@ runs:
   steps:
     - run: docker pull --platform ${{ inputs.os }}/${{ inputs.architecture }} ${{ inputs.image }}
       shell: bash
+    - run: "docker pull --platform ${{ inputs.os }}/${{ inputs.architecture }} ${{ inputs.image }} 2>&1 | grep -zqv 'does not match the specified platform'"
+      shell: bash
+
