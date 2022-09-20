@@ -1,0 +1,17 @@
+name: 'Verify Docker Image Platform'
+description: 'Verifies that a Docker image is available for a certain OS and architecture combination by attempting to pull it.'
+inputs:
+  image:
+    description: 'The Docker image reference to verify, e.g., docker.steadybit.io/steadybit/agent:latest'
+    required: true
+  os:
+    description: 'The expected operating system, e.g., linux'
+    required: true
+  architecture:
+    description: 'The expected system architecture, e.g., arm64'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: docker pull --platform ${{ inputs.os }}/${{ inputs.architecture }} ${{ inputs.image }}
+      shell: bash
